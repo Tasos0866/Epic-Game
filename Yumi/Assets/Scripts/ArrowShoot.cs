@@ -15,10 +15,10 @@ public class ArrowShoot : MonoBehaviour {
 	public float fireRate = 0.0f;
 	public float nextFire = 0.0f;
 
-	private float velLimit;
+
 	private bool falsePull;
 	private bool isPulled;
-	private bool trajectoryCollision;
+
 	public float pullStartTime = 0.0f;
 	public float pullTime = 0f;
 
@@ -27,10 +27,9 @@ public class ArrowShoot : MonoBehaviour {
 	void Start(){
 		falsePull = false;
 		isPulled = false;
-		trajectoryCollision= false;
+
 		lineRenderer=GetComponent<LineRenderer>();
 
-		velLimit=100;
 		lineRenderer.SetWidth (0.3f, 0.3f);
 		lineRenderer.enabled=false;
 	}
@@ -61,7 +60,7 @@ public class ArrowShoot : MonoBehaviour {
 				isPulled=false;
 				lineRenderer.enabled=false;
 				offset = mousePos - Input.mousePosition;
-				trajectoryCollision=false;
+
 				/*
 				//nextFire = Time.time + pullTime; // this is the actual fire rate as things stand now
 				//animation.Play("FIRE");
@@ -137,7 +136,8 @@ public class ArrowShoot : MonoBehaviour {
 			Vector3 pos = plotTrajectoryAtTime(start, startVelocity, t);
 			if (Physics.Linecast(prev,pos)){
 				lineRenderer.material.mainTextureScale = new Vector2(20,1);
-				lineRenderer.SetVertexCount(vertCount-1);
+				if (vertCount>=1)
+					lineRenderer.SetVertexCount(vertCount-1);
 				break;
 			}
 			//lineRenderer.material.

@@ -12,4 +12,10 @@ public class SawScript : MonoBehaviour {
 	void Update () {
 	
 	}
+
+	void OnTriggerEnter(Collider c) {
+		if (c.tag == "Player"){
+			c.GetComponent<Entity>().TakeDamage(10);
+		}
+	}
 }

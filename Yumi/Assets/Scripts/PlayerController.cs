@@ -2,7 +2,7 @@
 using System.Collections;
 
 [RequireComponent(typeof(PlayerPhysics))]
-public class PlayerController : MonoBehaviour {
+public class PlayerController : Entity {
 
 	//player handling
 	public float gravity = 20;
