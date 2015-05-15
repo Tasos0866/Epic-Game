@@ -1,10 +1,10 @@
 # =============== #
 # Unity generated #
 # =============== #
-Temp/
-Library/
-Yumi/Temp/
-Yumi/Library/
+Temp/*
+Library/*
+Yumi/Temp/*
+Yumi/Library/*
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
 # ===================================== #
