@@ -1,10 +1,10 @@
 # =============== #
 # Unity generated #
 # =============== #
-Temp/*
-Library/*
-Yumi/Temp/*
-Yumi/Library/*
+Temp/
+Library/
+Yumi/Temp/
+Yumi/Library/
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
 # ===================================== #
@@ -30,6 +30,3 @@ obj/
 .Trashes
 ehthumbs.db
 Thumbs.db
-Yumi/Temp/UnityLockfile
-Yumi/Library/assetDatabase3
-Yumi/Temp/UnityLockfile

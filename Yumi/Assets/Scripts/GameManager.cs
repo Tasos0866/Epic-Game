@@ -11,7 +11,8 @@ public class GameManager : MonoBehaviour {
 		SpawnPlayer();
 	}
 	
-	private void SpawnPlayer(){
+	public void SpawnPlayer(){
 		cam.SetTarget((Instantiate(player, new Vector3(0,5,0), Quaternion.identity) as GameObject).transform);
+		
 	}
 }
