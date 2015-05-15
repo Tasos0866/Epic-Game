@@ -3,8 +3,10 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour {
 
+	public Transform spawnPoint;
 	public GameObject player;
 	private GameCamera cam;
+
 
 	void Start () {
 		cam = GetComponent<GameCamera>();
@@ -12,7 +14,9 @@ public class GameManager : MonoBehaviour {
 	}
 	
 	public void SpawnPlayer(){
-		cam.SetTarget((Instantiate(player, new Vector3(0,5,0), Quaternion.identity) as GameObject).transform);
+		GameObject playerInstance = (Instantiate(player, spawnPoint.transform.position, Quaternion.identity)) as GameObject;
+		playerInstance.name="Player";
+		cam.SetTarget(playerInstance.transform);
 		
 	}
 }

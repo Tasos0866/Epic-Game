@@ -16,6 +16,10 @@ public class GameCamera : MonoBehaviour {
 			float y = IncrementTowards(transform.position.y, target.position.y+3, trackSpeed);
 			transform.position = new Vector3(x, y, transform.position.z);
 		}
+		if (target==null){
+			Debug.Log("you dead somehow, reset target of cam");
+			this.SetTarget(GameObject.FindWithTag("Player").transform);
+		}
 	}
 
 	private float IncrementTowards(float n, float target, float a){

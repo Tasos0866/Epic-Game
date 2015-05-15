@@ -981,6 +981,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57739e319b6b2c742a902c8eb372409a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnPoint: {fileID: 437318, guid: cf35bb0a7b2fc7b439330efdef779d14, type: 2}
+  player: {fileID: 134474}
 --- !u!114 &11498060
 MonoBehaviour:
   m_ObjectHideFlags: 1
