@@ -16,16 +16,5 @@ public class FallingDeath : MonoBehaviour {
 
 		}
 	}
-//	
-//	// Update is called once per frame
-//	void LateUpdate () {
-//
-//		if (transform.position.y < -5){
-//			GameObject playerInstance= Instantiate(player, spawnPoint.transform.position, Quaternion.identity) as GameObject;
-//			playerInstance.name="Player";
-//			Destroy (this.gameObject);
-//			//Debug.Log(" you dead ");
-//		}
-//	}
 
 }

@@ -6,6 +6,10 @@ public class Entity : MonoBehaviour {
 	public float health;
 	public GameObject ragdoll;
 
+	//TEMPORARY //////////////////////////////////////////////////////////
+	public GameObject player;
+	//TEMPORARY //////////////////////////////////////////////////////////
+
 	public void TakeDamage(float dmg){
 		health -=dmg;
 
@@ -16,8 +20,14 @@ public class Entity : MonoBehaviour {
 
 	public void Die(){
 		Debug.Log ("DIE");
-		Ragdoll r =	(Instantiate(ragdoll, transform.position, transform.rotation) as GameObject).GetComponent<Ragdoll>();
-		r.CopyPose(transform);
-		Destroy(this.gameObject);
+
+		if (this.tag=="Player"){
+			Ragdoll r =	(Instantiate(ragdoll, transform.position, transform.rotation) as GameObject).GetComponent<Ragdoll>();
+			r.CopyPose(transform);
+			DestroyObject(r.gameObject,2);
+		}
+		//Destroy(this.gameObject);
+
+
 	}
 }
