@@ -25,16 +25,15 @@ public class ArrowControl : MonoBehaviour {
 
 	void OnCollisionEnter(Collision collision){
 
-		//this.transform.parent = collision.gameObject.transform;
 		Destroy (GetComponent<Rigidbody>());
 
-		//creating empty object that has scale (1,1,1) to assign my object to remain unscaled
-		GameObject unScaledParent = new GameObject();
-		DestroyObject(unScaledParent, 5);
-		unScaledParent.transform.parent = collision.transform;
-		transform.parent = unScaledParent.transform;
+		if (collision.transform.parent.name != "scaleFix"){
+			GameObject unScaledParent = new GameObject();
+			unScaledParent.name="scaleFix";
+			unScaledParent.transform.SetParent(collision.transform.parent);
+			collision.transform.SetParent(unScaledParent.transform);
+		}
+		transform.SetParent(collision.transform.parent);
 
-	}
-
-
+	}	
 }
