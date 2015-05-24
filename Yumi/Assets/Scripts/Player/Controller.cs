@@ -107,7 +107,7 @@ public class Controller : RaycastController{
 		if (collisions.climbingSlope){
 			float directionX = Mathf.Sign(velocity.x);
 			rayLength = Mathf.Abs(velocity.x) + skinWidth;
-			Vector3 rayOrigin = ((directionY == -1)?raycastOrigins.bottomLeft:raycastOrigins.bottomRight) +Vector3.up * velocity.y;
+			Vector3 rayOrigin = ((directionX == -1)?raycastOrigins.bottomLeft:raycastOrigins.bottomRight) +Vector3.up * velocity.y;
 			RaycastHit hit;
 			Ray ray = new Ray(rayOrigin, Vector3.right * directionX);
 
