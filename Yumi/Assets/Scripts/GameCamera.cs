@@ -18,9 +18,16 @@ public class GameCamera : MonoBehaviour {
 		}
 		if (target==null){
 			Debug.Log("you dead somehow, reset target of cam");
-			this.SetTarget(GameObject.FindWithTag("Player").transform);
-		}
-	}
+
+            
+            GameObject newTarget = GameObject.FindWithTag("Player");
+            
+            this.transform.position = new Vector3(newTarget.transform.position.x, newTarget.transform.position.y, this.transform.position.z);
+
+            //TO EASE IN the new player
+            //this.SetTarget(newTarget.transform);
+        }
+    }
 
 	private float IncrementTowards(float n, float target, float a){
 		if (n == target){

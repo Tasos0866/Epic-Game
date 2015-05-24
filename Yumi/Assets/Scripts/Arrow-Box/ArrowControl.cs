@@ -8,10 +8,10 @@ public class ArrowControl : MonoBehaviour {
 	public int gravityRotate = 1;
 	private Rigidbody myRigidBody;
 
+    Collision newParent;
 
 
-
-	void Start(){
+    void Start(){
 		this.myRigidBody = this.GetComponent<Rigidbody>();
 	}
 
@@ -24,16 +24,25 @@ public class ArrowControl : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision collision){
+        newParent = collision;
+        Destroy (GetComponent<Rigidbody>());
 
-		Destroy (GetComponent<Rigidbody>());
-
-		if (collision.transform.parent.name != "scaleFix"){
+        //delete all when scaling fixed to 1 for objects----------------------------
+        if (collision.transform.parent.name != "scaleFix"){
 			GameObject unScaledParent = new GameObject();
 			unScaledParent.name="scaleFix";
 			unScaledParent.transform.SetParent(collision.transform.parent);
 			collision.transform.SetParent(unScaledParent.transform);
-		}
-		transform.SetParent(collision.transform.parent);
+            transform.SetParent(unScaledParent.transform.parent);
+        }
+        transform.SetParent(collision.transform.parent);
+        
+        if (collision.transform.name == "Moving Platform")
+        {
+            transform.SetParent(collision.transform);
+        }
+        //--------------------------------------------------------------------------
 
-	}	
+    }
+
 }

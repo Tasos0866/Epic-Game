@@ -11,7 +11,8 @@ public class GameManager : MonoBehaviour {
 	void Start () {
 		cam = GetComponent<GameCamera>();
 		SpawnPlayer();
-	}
+        cam.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, this.transform.position.z);
+    }
 	
 	public void SpawnPlayer(){
 		GameObject playerInstance = (Instantiate(player, spawnPoint.transform.position, Quaternion.identity)) as GameObject;
