@@ -14,7 +14,7 @@ public class Controller : RaycastController{
 		GetComponent<BoxCollider>().isTrigger = true;
 	}
 	
-	public void Move(Vector3 velocity){
+	public void Move(Vector3 velocity, bool standingOnPlatform = false){
 		UpdateRaycastOrigins();
 		collisions.Reset();
 		collisions.velocityOld = velocity;
@@ -29,6 +29,10 @@ public class Controller : RaycastController{
 			VerticalCollisions(ref velocity);
 		}
 		transform.Translate (velocity);
+
+		if (standingOnPlatform){
+			collisions.below = true;
+		}
 	}
 
 	void HorizontalCollisions(ref Vector3 velocity) {
@@ -44,6 +48,10 @@ public class Controller : RaycastController{
 			Debug.DrawRay(rayOrigin, Vector3.right * directionX * rayLength, Color.red);
 			
 			if (Physics.Raycast(ray, out hit, rayLength, collisionMask)){
+
+				if (hit.distance == 0){
+					continue;
+				}
 
 				float slopeAngle = Vector3.Angle(hit.normal,Vector3.up);
 
