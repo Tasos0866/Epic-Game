@@ -11,7 +11,7 @@ public class EnemyController : RaycastController{
 	
 	public override void Start(){
 		base.Start();
-		GetComponent<BoxCollider>().isTrigger = true;
+		GetComponent<BoxCollider>().isTrigger = false;
 	}
 	
 	public void Move(Vector3 velocity){
@@ -44,7 +44,7 @@ public class EnemyController : RaycastController{
 			Debug.DrawRay(rayOrigin, Vector3.right * directionX * rayLength, Color.red);
 			
 			if (Physics.Raycast(ray, out hit, rayLength, collisionMask)){
-				
+                
 				float slopeAngle = Vector3.Angle(hit.normal,Vector3.up);
 				
 				if (i==0 && slopeAngle <= maxClimbAngle){

@@ -9,7 +9,6 @@ public class Player : Entity{
 	float accelerationTimeGrounded = .05f;
 	float walkSpeed = 8;
 	float runSpeed = 12;
-
 	float gravity;
 	float jumpVelocity;
 	Vector3 velocity;
@@ -19,38 +18,45 @@ public class Player : Entity{
 
 	Controller controller;
 
-	void Start (){
-		controller = GetComponent<Controller>();
+    public AudioSource landingSound;//NOT IMPLEMENTED YET
+    //if (velocity.y < -15){
+    //    landingSound.mute = false
+    //}
+
+    void Start (){
+        controller = GetComponent<Controller>();
 		
 		gravity = -(2 * jumpHeight) / Mathf.Pow (timeToJumpApex, 2);
 		jumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
-		print ("Gravity: " + gravity + "  Jump Velocity: " + jumpVelocity);
+		//print ("Gravity: " + gravity + "  Jump Velocity: " + jumpVelocity);
 
 	}
-	
 
 	void Update (){
 		if (controller.collisions.above) {
 			velocity.y = 0;
 		}
 		if (controller.collisions.below){
-			velocity.y=0;
-			doubleJump=false;
-		}
+			velocity.y = 0;
+            doubleJump = false;
+        }
 
 		Vector2 input = new Vector2 (Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw ("Vertical"));
 
 		//single jump
-		if (Input.GetKeyDown (KeyCode.Space) && controller.collisions.below) {
+		if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)) 
+            && controller.collisions.below) {
 			velocity.y = jumpVelocity;
-		}
+        }
 
 		//double jump
-		if (!controller.collisions.above && !controller.collisions.below && !doubleJump && Input.GetKeyDown (KeyCode.Space)){
+		if (!controller.collisions.above && !controller.collisions.below 
+            && !doubleJump 
+            && (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)))
+            {
 			velocity.y = jumpVelocity;
 			doubleJump=true;
 		}
-
 
 
 		float speed= (Input.GetButton("Run")? runSpeed : walkSpeed);
@@ -63,4 +69,15 @@ public class Player : Entity{
 
 
 	}
+
+    
+
+    public void SetVelocity(Vector3 vel)
+    {
+        velocity += vel;
+    }
+    public Vector3 GetVelocity()
+    {
+        return velocity;
+    }
 }

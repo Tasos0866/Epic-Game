@@ -9,6 +9,7 @@ public class Controller : RaycastController{
 	
 	public CollisionInfo collisions;
 
+
 	public override void Start(){
 		base.Start();
 		GetComponent<BoxCollider>().isTrigger = true;
