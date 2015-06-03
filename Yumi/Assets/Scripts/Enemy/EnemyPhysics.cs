@@ -17,7 +17,7 @@ public class EnemyPhysics : Entity
     public float chaseDistance;
     float playerDistance;
     public float rotationDamping;
-    public float patrolWaitTime = 1f;
+    public float patrolWaitTime;
     public Vector3[] patrolWaypoints;
     Vector3[] globalWaypoints;
 
@@ -31,6 +31,8 @@ public class EnemyPhysics : Entity
 
 
     EnemyController controller;
+
+    public GameObject explosion;
 
     void Start()
     {
@@ -50,11 +52,6 @@ public class EnemyPhysics : Entity
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            GetComponent<Renderer>().material.color = Color.blue;
-        }
-
         if (lookTarget == null)
         {
             lookTarget = GameObject.Find("Player") as GameObject;
@@ -66,6 +63,7 @@ public class EnemyPhysics : Entity
 
         if (health <= 0)
         {
+            Instantiate(explosion, transform.position, new Quaternion());
             Destroy(this.gameObject);
         }
 
@@ -223,7 +221,16 @@ public class EnemyPhysics : Entity
     }
     IEnumerator flashHit(float waitTime, GameObject obj)
     {
-        Renderer renderer = obj.GetComponent<Renderer>();
+        Renderer renderer;
+
+        if (obj.name == "ShiaBoss")
+        {
+             renderer = obj.GetComponentInChildren<Renderer>();
+        }
+        else
+        {
+            renderer = obj.GetComponent<Renderer>();
+        }
         Color originalColor = renderer.material.color;
         renderer.material.color = Color.red;
         yield return new WaitForSeconds(waitTime);

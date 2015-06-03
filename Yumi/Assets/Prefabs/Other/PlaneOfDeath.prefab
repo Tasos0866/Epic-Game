@@ -60,8 +60,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57739e319b6b2c742a902c8eb372409a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPoint: {fileID: 437318, guid: cf35bb0a7b2fc7b439330efdef779d14, type: 2}
-  player: {fileID: 171232, guid: 15c8daf5cd5761a4f941879902d1e055, type: 2}
+  spawnPoint: {fileID: 468000, guid: a1e0f744194ee62478b52b2c78044193, type: 2}
+  player: {fileID: 196916, guid: d39fcbb749f01054a935d75b89d42b1f, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

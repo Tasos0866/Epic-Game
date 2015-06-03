@@ -102,7 +102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59babd8d7cdcfeb4687c74749a3a41af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 1000
+  health: 30
   ragdoll: {fileID: 0}
   player: {fileID: 0}
   lookTarget: {fileID: 0}
@@ -116,6 +116,7 @@ MonoBehaviour:
   patrolWaypoints:
   - {x: 4.73999977, y: 0, z: 0}
   - {x: -3.00999999, y: 0, z: 0}
+  explosion: {fileID: 126378, guid: ee2128861e95d8949ac7c2fc1dfb5d29, type: 2}
 --- !u!114 &11482936
 MonoBehaviour:
   m_ObjectHideFlags: 1

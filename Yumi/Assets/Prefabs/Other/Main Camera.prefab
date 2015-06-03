@@ -90,8 +90,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36082a9a9f0dae64389a70daa6de9a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPoint: {fileID: 0}
-  player: {fileID: 171232, guid: 15c8daf5cd5761a4f941879902d1e055, type: 2}
+  spawnPoint: {fileID: 468000, guid: a1e0f744194ee62478b52b2c78044193, type: 2}
+  player: {fileID: 196916, guid: d39fcbb749f01054a935d75b89d42b1f, type: 2}
 --- !u!114 &11489720
 MonoBehaviour:
   m_ObjectHideFlags: 1

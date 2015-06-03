@@ -21,6 +21,15 @@ public class GUI_Text : MonoBehaviour
             yourText.text = "<b>Shoot <color=blue>EVERYTHING</color></b> that moves" +
                 "\n <b><color=red>HAVE FUN!</color></b>";
         }
+        else if (this.gameObject.name == "text3")
+        {
+            yourText.text = "<b><color=black>This is the end of the Tutorial!</color></b>" +
+                "\n <b><color=black>Let's get right on it!</color></b>";
+        }
+        else
+        {
+
+        }
     }
 
     void OnTriggerExit(Collider hit)
