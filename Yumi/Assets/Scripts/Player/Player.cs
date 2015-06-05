@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Player : Entity{
 
@@ -19,18 +20,30 @@ public class Player : Entity{
 	Controller controller;
 
     public AudioSource landingSound;//NOT IMPLEMENTED YET
-    //if (velocity.y < -15){
-    //    landingSound.mute = false
-    //}
+                                    //if (velocity.y < -15){
+                                    //    landingSound.mute = false
+                                    //}
+
+
+    public Image healthBar;
+    public Text healthText;
+    public float maxHealth;
+
 
     void Start (){
         controller = GetComponent<Controller>();
 		
 		gravity = -(2 * jumpHeight) / Mathf.Pow (timeToJumpApex, 2);
 		jumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
-		//print ("Gravity: " + gravity + "  Jump Velocity: " + jumpVelocity);
+		print ("Gravity: " + gravity + "  Jump Velocity: " + jumpVelocity);
 
-	}
+        //this looks so bad but dunno a better way than this.
+        healthBar =GameObject.Find("HealthbarSystem").GetComponent<Transform>().transform.FindChild("HealthBG").FindChild("Health").GetComponent<Image>();
+        healthText = GameObject.Find("HealthbarSystem").GetComponent<Transform>().transform.FindChild("HealthBG").FindChild("Health").FindChild("Text").GetComponent<Text>();
+        maxHealth = health; //max health is the health when initialized
+        healthBar.fillAmount = 1;
+        healthText.text = "100";
+    }
 
 	void Update (){
 		if (controller.collisions.above) {

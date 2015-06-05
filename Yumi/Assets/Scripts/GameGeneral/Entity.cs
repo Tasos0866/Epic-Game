@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Entity : MonoBehaviour {
 
@@ -34,16 +35,13 @@ public class Entity : MonoBehaviour {
         {
             health -= dmg;
         }
-        if (health <= 0)
-        {
-            Die();
-        }
+        checkIfDead();
+
+        
     }
 
-    public void TakeDamage(float dmg, Transform damageGiver){
-
-
-
+    public void TakeDamage(float dmg, Transform damageGiver)
+    {
         if (this.gameObject.name == "Player")
         {
             if (!invincible)
@@ -63,11 +61,18 @@ public class Entity : MonoBehaviour {
         {
             health -= dmg;
         }
-            if (health<=0){
-			Die();
-		}
+        checkIfDead();
 
-	}
+        
+    }
+
+    void checkIfDead()
+    {
+        if (health <= 0)
+        {
+            Die();
+        }
+    }
 
 	public void Die(){
 		//Debug.Log ("DIE");
@@ -75,13 +80,11 @@ public class Entity : MonoBehaviour {
 		if (this.tag=="Player"){
 			Ragdoll r =	(Instantiate(ragdoll, transform.position, transform.rotation) as GameObject).GetComponent<Ragdoll>();
 			r.CopyPose(transform);
-			DestroyObject(r.gameObject,0f);
-            //Destroy(GetComponent<Controller>);
-            Destroy(this.gameObject, 0.5f);
-            StartCoroutine(waitFor(0.5f));
+			DestroyObject(r.gameObject,0f); //destroy ragdoll
+            Destroy(this.gameObject, 0.5f); //destroy player
+            StartCoroutine(waitFor(0.5f));  //respawn after waitFor
             
         }
-		//Destroy(this.gameObject);
 	}
 
     IEnumerator FlashPlayer(float time, float intervalTime)

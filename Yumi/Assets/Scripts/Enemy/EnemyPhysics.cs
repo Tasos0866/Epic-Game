@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using UnityEngine.UI;
 
 public class EnemyPhysics : Entity
 {
@@ -29,13 +30,15 @@ public class EnemyPhysics : Entity
     Vector3 velocity;
     float velocityXSmoothing;
 
-
     EnemyController controller;
-
     public GameObject explosion;
+
+    private Image healthBar;
+    float maxHealth;
 
     void Start()
     {
+        
         controller = GetComponent<EnemyController>();
 
         gravity = -(2 * jumpHeight) / Mathf.Pow(timeToJumpApex, 2);
@@ -46,6 +49,9 @@ public class EnemyPhysics : Entity
         {
             globalWaypoints[i] = patrolWaypoints[i] + transform.position;
         }
+
+        healthBar = transform.FindChild("EnemyCanvas").FindChild("HealthBG").FindChild("Health").GetComponent<Image>();
+        maxHealth = health; //max health is the health when initialized
     }
 
 
@@ -203,6 +209,8 @@ public class EnemyPhysics : Entity
             chaseDistance = 100;                                         //change chase distance to something big so that the enemy will always chase
             newSpeed = collision.relativeVelocity.magnitude * collision.gameObject.GetComponent<ArrowControl>().pushBackDistance; //add pushBack velocity depending on the direction of the arrow
             SetVelocity(new Vector3(newSpeed*Mathf.Sign(collision.relativeVelocity.x), velocity.y, velocity.z));
+
+            this.healthBar.fillAmount = (float)this.health / (float)this.maxHealth;
         }
 
     }
@@ -210,13 +218,18 @@ public class EnemyPhysics : Entity
     {
         if (c.tag == "Player")
         {
-            if (c.gameObject.GetComponent<Entity>().health <= 10)
+            //THIS MUST CHANGE SO BAD//THIS MUST CHANGE SO BAD//THIS MUST CHANGE SO BAD//THIS MUST CHANGE SO BAD//THIS MUST CHANGE SO BAD//THIS MUST CHANGE SO BAD
+            Entity playerEntity = c.gameObject.GetComponent<Entity>();
+            Player myPlayer = c.gameObject.GetComponent<Player>();
+            if (playerEntity.health <= 10)
             {// THIS MUST CHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAANGEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
                 this.chaseDistance = 0; // THIS MUST CHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAANGEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE&&&&&&&&&&&&&&&&&&&&&&&
             }// THIS MUST CHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAANGEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-            c.gameObject.GetComponent<Entity>().TakeDamage(10, this.transform);              //give damage ammount
+            playerEntity.TakeDamage(10, this.transform);              //give damage ammount
+            myPlayer.healthBar.fillAmount = (float)myPlayer.health / (float)myPlayer.maxHealth;
+            myPlayer.healthText.text = (myPlayer.healthBar.fillAmount*100).ToString();
             StartCoroutine(flashHit(hitTime,c.gameObject));
-            
+            //THIS MUST CHANGE SO BAD//THIS MUST CHANGE SO BAD//THIS MUST CHANGE SO BAD//THIS MUST CHANGE SO BAD//THIS MUST CHANGE SO BAD//THIS MUST CHANGE SO BAD
         }
     }
     IEnumerator flashHit(float waitTime, GameObject obj)
